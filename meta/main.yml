@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Mark Stillwell
-  description: MariaDB for Ubuntu
+  description: RabbitMQ server for Ubuntu
   license: GPLv2
   min_ansible_version: 1.2
   platforms:
@@ -12,7 +12,5 @@ galaxy_info:
     - raring
     - saucy
     - trusty
-  categories:
-  - database
-  - database:sql
+  categories: []
 dependencies: []

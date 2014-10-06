@@ -1,6 +1,6 @@
 ---
 - include: dockerized.yml
-  when: mariadb_dockerized_deployment
+  when: rabbitmq_dockerized_deployment
 
 - include: direct.yml
-  when: not mariadb_dockerized_deployment
+  when: not rabbitmq_dockerized_deployment

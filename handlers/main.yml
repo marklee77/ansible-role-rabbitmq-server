@@ -1,7 +1,7 @@
 ---
-- name: restart mariadb
+- name: restart rabbitmq-server
   service: 
-    name: mysql
+    name: rabbitmq-server
     state: restarted
 
 # FIXME: this could be done with a script, but would that be more secure?

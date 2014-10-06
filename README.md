@@ -1,9 +1,9 @@
-marklee77.mariadb
+marklee77.rabbitmq-server
 =================
 
-[![Build Status](https://travis-ci.org/marklee77/ansible-role-mariadb.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-mariadb)
+[![Build Status](https://travis-ci.org/marklee77/ansible-role-rabbitmq-server.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-rabbitmq-server)
 
-The purpose of this role is to deploy MariaDB onto Ubuntu. There is also an
+The purpose of this role is to deploy rabbitmq-server onto Ubuntu. There is also an
 support for an experimental "dockerized" deployment. This dockerized deployment
 copies the role to the target machine and uses the original ansible-based
 functionality to build a docker image, and then uses recent ansible features to
@@ -17,19 +17,19 @@ not (easily) run on travis.
 Role Variables
 --------------
 
-- mariadb_repository_mirror: http://mirrors.coreix.net/mariadb by default.
-- mariadb_version: 10.0
-- mariadb_mysql_root_password: random value
-- mariadb_enable_remote: false
-- mariadb_set_root_password: true
+- rabbitmq-server_repository_mirror: http://mirrors.coreix.net/rabbitmq-server by default.
+- rabbitmq-server_version: 10.0
+- rabbitmq-server_mysql_root_password: random value
+- rabbitmq-server_enable_remote: false
+- rabbitmq-server_set_root_password: true
 
 The variables below only affect the dockerized deployment:
 
-- mariadb_dockerized_deployment: false
-- mariadb_docker_username: default
-- mariadb_docker_imagename: mariadb
-- mariadb_docker_containername: mariadb
-- mariadb_port: 3306
+- rabbitmq-server_dockerized_deployment: false
+- rabbitmq-server_docker_username: default
+- rabbitmq-server_docker_imagename: rabbitmq-server
+- rabbitmq-server_docker_containername: rabbitmq-server
+- rabbitmq-server_port: 3306
 
 Example Playbook
 -------------------------
@@ -37,7 +37,7 @@ Example Playbook
     - hosts: all
       sudo: True
       roles:
-        - marklee77.mariadb
+        - marklee77.rabbitmq-server
 
 License
 -------
@@ -58,5 +58,5 @@ Known Issues
 Todo
 ----
 
-- consider making mapping of mariadb port to host interface optional
+- consider making mapping of rabbitmq-server port to host interface optional
 
