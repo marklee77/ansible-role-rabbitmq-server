@@ -1,7 +1,4 @@
 ---
-rabbitmq_bind_address: 127.0.0.1
-rabbitmq_port: 5672
-
 # The variables below only apply to dockerized deployment
 rabbitmq_dockerized_deployment: false
 rabbitmq_docker_username: default
