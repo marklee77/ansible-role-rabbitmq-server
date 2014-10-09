@@ -8,9 +8,10 @@ RUN mkdir -p roles && ln -snf .. roles/marklee77.rabbitmq-server
 RUN ansible-playbook -i inventories/local.ini deploy.yml -e '{ \
       "rabbitmq_dockerize_context" : "install" }'
 
-VOLUME [ "/root", "/etc/mysql", "/var/run/mysqld", "/usr/lib/mysql", \
-         "/var/log" ]
+VOLUME [ "/etc/rabbitmq", "/var/run/rabbitmq", "/var/lib/rabbitmq", \
+         "/var/log/rabbitmq" ]
 
-CMD [ "/usr/sbin/mysqld", "--user=mysql" ]
+USER rabbitmq
+CMD [ "/usr/sbin/rabbitmq-server" ]
 
-EXPOSE 3306
+EXPOSE 5672
