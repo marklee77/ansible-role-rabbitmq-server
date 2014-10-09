@@ -1,0 +1,12 @@
+---
+#- name: wait until rabbitmq service is ready
+#  wait_for:
+#    delay: 1
+#    path: /var/run/mysqld/mysqld.sock
+#    state: present
+
+# FIXME: delete...
+- name: ensure anonymous guest user is absent
+  rabbitmq_user:
+    user: guest
+    state: absent

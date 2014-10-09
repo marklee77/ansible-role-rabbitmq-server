@@ -1,6 +1,18 @@
 ---
-- include: dockerized.yml
+- include: docker.yml
   when: rabbitmq_dockerized_deployment
 
-- include: direct.yml
-  when: not rabbitmq_dockerized_deployment
+- include: install.yml
+  when: not rabbitmq_dockerized_deployment and (
+        rabbitmq_dockerize_context is not defined or
+        rabbitmq_dockerize_context == "install" )
+
+#- include: offline_configuration.yml
+#  when: not rabbitmq_dockerized_deployment and (
+#        rabbitmq_dockerize_context is not defined or
+#        rabbitmq_dockerize_context == "offline_configuration" )
+
+#- include: online_configuration.yml
+#  when: not rabbitmq_dockerized_deployment and (
+#        rabbitmq_dockerize_context is not defined or
+#        rabbitmq_dockerize_context == "online_configuration" )

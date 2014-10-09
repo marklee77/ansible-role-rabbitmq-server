@@ -1,13 +1,9 @@
 ---
-rabbitmq_run_dir: "{{ lookup('env', 'PWD') }}"
-rabbitmq_mysql_root_password: "{{ lookup('password', mariadb_run_dir + '/private/credentials/mysql-root-password') }}"
-
-rabbitmq_enable_remote: false
-rabbitmq_set_root_password: true
+rabbitmq_bind_address: 127.0.0.1
+rabbitmq_port: 5672
 
 # The variables below only apply to dockerized deployment
 rabbitmq_dockerized_deployment: false
 rabbitmq_docker_username: default
 rabbitmq_docker_imagename: rabbitmq
 rabbitmq_docker_containername: rabbitmq
-rabbitmq_port: 5672
