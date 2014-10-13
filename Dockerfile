@@ -13,6 +13,7 @@ RUN ansible-playbook -i inventories/local.ini playbooks/install.yml
 VOLUME [ "/etc/rabbitmq", "/var/run/rabbitmq", "/var/lib/rabbitmq", \
          "/var/log/rabbitmq", "/var/log/supervisor" ]
 
-CMD [ "/usr/bin/supervisord" ]
+USER rabbitmq
+CMD [ "/usr/sbin/rabbitmq-server" ]
 
 EXPOSE 5672
