@@ -2,8 +2,4 @@
 # This file is ONLY for variables that are expected to be static across all 
 # deployments or that may affect the image BUILD. Configuration and runtime 
 # variables should be passed directly.
-mariadb_dockerize_context: docker
-mariadb_repository_mirror: "{{ mariadb_repository_mirror }}"
-mariadb_version: "{{ mariadb_version }}"
-mariadb_bind_address: 0.0.0.0
-mariadb_port: 3306
+rabbitmq_dockerize_context: docker

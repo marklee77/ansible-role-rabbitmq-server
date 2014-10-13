@@ -2,3 +2,13 @@
 - hosts: all
   sudo: True
   tasks:
+
+    - name: ensure test rabbitmq user is present
+      rabbitmq_user:
+        user: test
+        password: test
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+        state: present
+        force: yes

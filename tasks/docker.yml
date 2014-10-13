@@ -13,13 +13,36 @@
   synchronize:
     src: ../
     dest: "{{ ansible_env.PWD }}/.ansible_cache/docker/rabbitmq"
-    links: yes
-    delete: yes
+    archive: no
+    checksum: yes
+    recursive: yes
+
+- name: ensure docker image configuration directory exists
+  file:
+    path: "{{ item }}"
+    owner: "{{ ansible_ssh_user }}"
+    state: directory
+  with_items:
+    - "{{ ansible_env.PWD }}/.ansible_cache/docker/rabbitmq/playbooks/group_vars"
+
+- name: update configuration used to build docker image from template
+  template:
+    src: ansible_cache/docker/rabbitmq/playbooks/group_vars/all.yml
+    owner: "{{ ansible_ssh_user }}"
+    dest: "{{ ansible_env.PWD }}/.ansible_cache/docker/rabbitmq/playbooks/group_vars/all.yml"
 
 - name: ensure rabbitmq docker image has been built
   docker_image:
     name: "{{ rabbitmq_docker_username }}/rabbitmq"
     path: "{{ ansible_env.PWD }}/.ansible_cache/docker/rabbitmq"
+    state: present
+
+- name: ensure rabbitmq data container exists
+  docker:
+    image: "{{ rabbitmq_docker_username }}/{{ rabbitmq_docker_imagename }}"
+    name: "{{ rabbitmq_docker_containername }}_data"
+    command: /bin/true
+    detach: no
     state: present
 
 - name: ensure rabbitmq service is running
