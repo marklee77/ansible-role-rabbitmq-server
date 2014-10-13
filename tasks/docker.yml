@@ -33,7 +33,7 @@
 
 - name: ensure rabbitmq docker image has been built
   docker_image:
-    name: "{{ rabbitmq_docker_username }}/rabbitmq"
+    name: "{{ rabbitmq_docker_username }}/{{ rabbitmq_docker_imagename }}"
     path: "{{ ansible_env.PWD }}/.ansible_cache/docker/rabbitmq"
     state: present
 
@@ -49,6 +49,7 @@
   docker:
     image: "{{ rabbitmq_docker_username }}/{{ rabbitmq_docker_imagename }}"
     name: "{{ rabbitmq_docker_containername }}_server"
+    volumes_from: "{{ rabbitmq_docker_containername }}_data"
     ports: 5672:5672
     detach: yes
     state: running

@@ -53,3 +53,4 @@ Known Issues
   the docker group should be able to build and deploy containers without sudo.
 - problems with accessing admin functions in container due to need to run 
   rabbitmqctl
+- either figure out why supervisor is not working right or remove it...
