@@ -9,9 +9,8 @@ RUN ansible-playbook -i inventories/local.ini deploy.yml -e '{ \
       "rabbitmq_dockerize_context" : "install" }'
 
 VOLUME [ "/etc/rabbitmq", "/var/run/rabbitmq", "/var/lib/rabbitmq", \
-         "/var/log/rabbitmq" ]
+         "/var/log/rabbitmq", "/var/log/supervisor" ]
 
-USER rabbitmq
-CMD [ "/usr/sbin/rabbitmq-server" ]
+CMD [ "/usr/bin/supervisord" ]
 
 EXPOSE 5672
