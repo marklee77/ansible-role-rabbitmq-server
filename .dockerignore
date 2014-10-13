@@ -1,7 +1,4 @@
-AUTHORS
-LICENSE
 Vagrantfile
-*.md
 .dockerignore
 .git
 .gitignore
@@ -12,3 +9,4 @@ test.yml
 group_vars
 private
 roles
+templates/ansible_cache
