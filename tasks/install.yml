@@ -33,10 +33,19 @@
     state: started 
     enabled: yes
 
-- name: ensure anonymous guest user is absent
+#- name: ensure anonymous guest user is absent
+#  rabbitmq_user:
+#    user: guest
+#    state: absent
+
+- name: ensure rabbitmq guest user is present
   rabbitmq_user:
     user: guest
-    state: absent
+    password: "{{ rabbitmq_rabbitmq_guest_password }}"
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    state: present
 
 - name: ensure rabbitmq is properly shut down for docker
   service: 

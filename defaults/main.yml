@@ -1,4 +1,12 @@
 ---
+rabbitmq_run_dir: "{{ lookup('env', 'PWD') }}"
+
+rabbitmq_rabbitmq_guest_password: >
+  {{ lookup('password', rabbitmq_run_dir +
+                        '/private/credentials/rabbitmq-guest-password
+                         length=20
+                         chars=ascii_letters,digits') }}
+
 # The variables below only apply to dockerized deployment
 rabbitmq_dockerized_deployment: false
 rabbitmq_docker_username: default

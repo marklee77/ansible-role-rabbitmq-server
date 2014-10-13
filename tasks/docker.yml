@@ -3,7 +3,6 @@
   file:
     path: "{{ item }}"
     owner: "{{ ansible_ssh_user }}"
-    mode: 0700
     state: directory
   with_items:
     - "{{ ansible_env.PWD }}/.ansible_cache"
@@ -50,6 +49,7 @@
     image: "{{ rabbitmq_docker_username }}/{{ rabbitmq_docker_imagename }}"
     name: "{{ rabbitmq_docker_containername }}_server"
     volumes_from: "{{ rabbitmq_docker_containername }}_data"
+    env: "RABBITMQ_GUEST_PASSWORD={{ rabbitmq_rabbitmq_guest_password }}"
     ports: 5672:5672
     detach: yes
     state: running

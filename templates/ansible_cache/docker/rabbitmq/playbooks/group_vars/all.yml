@@ -3,3 +3,7 @@
 # deployments or that may affect the image BUILD. Configuration and runtime 
 # variables should be passed directly.
 rabbitmq_dockerize_context: docker
+
+# FIXME: there should be a better way than baking the password in to the image,
+# but we will have to come back to it later.
+rabbitmq_rabbitmq_guest_password: "{{ rabbitmq_rabbitmq_guest_password }}"
