@@ -2,7 +2,7 @@
 - hosts: all
   sudo: True
   vars:
-    rabbitmq_dockerized_deployment: true
+    rabbitmq_dockerized_deployment: false
 
   roles:
     - marklee77.rabbitmq-server
