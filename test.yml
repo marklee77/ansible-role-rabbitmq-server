@@ -11,6 +11,3 @@
         read_priv: .*
         write_priv: .*
         state: present
-        force: yes
-
-#curl --user $USER:$PASS http://<host>:<port>/api/vhosts

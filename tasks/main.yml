@@ -1,6 +1,20 @@
 ---
-- include: docker.yml
-  when: rabbitmq_dockerized_deployment
+- name: ensure rabbitmq packages are installed
+  apt: 
+    pkg: "{{ item }}"
+    state: latest 
+    update_cache: yes 
+    cache_valid_time: 600
+  with_items:
+    - rabbitmq-server
 
-- include: install.yml
-  when: not rabbitmq_dockerized_deployment 
+- name: ensure rabbitmq is started and enabled
+  service: 
+    name: rabbitmq-server
+    state: started 
+    enabled: yes
+
+- name: ensure anonymous guest user is absent
+  rabbitmq_user:
+    user: guest
+    state: absent

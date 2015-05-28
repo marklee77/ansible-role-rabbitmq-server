@@ -6,9 +6,3 @@ rabbitmq_rabbitmq_guest_password: >
                         '/private/credentials/rabbitmq-guest-password
                          length=20
                          chars=ascii_letters,digits') }}
-
-# The variables below only apply to dockerized deployment
-rabbitmq_dockerized_deployment: false
-rabbitmq_docker_username: default
-rabbitmq_docker_imagename: rabbitmq
-rabbitmq_docker_containername: rabbitmq
