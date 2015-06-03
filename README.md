@@ -1,5 +1,5 @@
-marklee77.rabbitmq-server
-=========================
+ansible role for rabbitmq-server
+================================
 
 [![Build Status](https://travis-ci.org/marklee77/ansible-role-rabbitmq-server.svg?branch=master)](https://travis-ci.org/marklee77/ansible-role-rabbitmq-server)
 
