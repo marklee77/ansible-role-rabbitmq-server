@@ -1,18 +1,45 @@
 ---
-- name: ensure rabbitmq packages are installed
-  apt: 
-    pkg: "{{ item }}"
-    state: latest 
-    update_cache: yes 
-    cache_valid_time: 600
-  with_items:
-    - rabbitmq-server
+- name: gather os specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution|lower }}-{{
+              ansible_distribution_version }}.yml"
+        - "{{ ansible_distribution|lower }}-{{
+              ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution|lower }}-{{
+              ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution|lower }}.yml"
+        - "{{ ansible_os_family|lower }}.yml"
+        - defaults.yml
+      paths:
+        - ../vars
 
-- name: ensure rabbitmq is started and enabled
-  service: 
-    name: rabbitmq-server
-    state: started 
+- name: ensure rabbitmq requirements packages are installed
+  action: "{{ rabbitmq_package_info.pkg_mgr }}"
+  args: rabbitmq_package_info.args
+  with_items: rabbitmq_package_info.pre_pkgs
+  when: rabbitmq_package_info.pre_pkgs|length > 0
+
+- name: ensure rabbitmq repository is enabled
+  action: "{{ rabbitmq_repo_info.pkg_repo }}"
+  args: rabbitmq_repo_info.args
+  with_items: rabbitmq_repo_info.repos
+  when: rabbitmq_repo_info.repos|length > 0
+
+- name: ensure rabbitmq packages are installed
+  action: "{{ rabbitmq_package_info.pkg_mgr }}"
+  args: rabbitmq_package_info.args
+  with_items: rabbitmq_package_info.pkgs
+  when: rabbitmq_package_info.pkgs|length > 0
+
+- name: ensure rabbitmq services are started and enabled
+  service:
+    name: "{{ item }}"
+    state: started
     enabled: yes
+  with_items: rabbitmq_services
+  when: rabbitmq_services|length > 0
 
 - name: ensure anonymous guest user is absent
   rabbitmq_user:
